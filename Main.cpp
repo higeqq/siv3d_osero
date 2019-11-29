@@ -47,12 +47,15 @@ void Main() {
             for(int j = 0; j < 8; j++) {
                 if(x[i + j * 8].leftClicked()) {
                     count++;
+                    
+                    //　もしカウントが割り切れるなら白を描画、割り切れないならブルーを描画
                     if(count % 2 == 0) {
                         color[i][j] = white;
-                        //                        if(color[i][j - 2] == white &&
-                        //                           color[i][j - 1] == blue) {
-                        //                            color[i][j - 1] = white;
-
+                        
+                        //縦の場合の青を白と白で挟んだ場合。
+                        if (color[i][j - 2] == white && color[i][j - 1] == blue) {
+                            color[i][j-1] = white;
+                        }
                     } else {
                         color[i][j] = blue;
                     }
@@ -66,5 +69,4 @@ void Main() {
             }
         }
     }
-    // ゲームを起動した時に石を4つある状態で始めれるようにする。
 }
