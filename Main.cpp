@@ -47,17 +47,50 @@ void Main() {
             for(int j = 0; j < 8; j++) {
                 if(x[i + j * 8].leftClicked()) {
                     count++;
-                    
+
                     //　もしカウントが割り切れるなら白を描画、割り切れないならブルーを描画
                     if(count % 2 == 0) {
                         color[i][j] = white;
-                        
-                        //縦の場合の青を白と白で挟んだ場合。
-                        if (color[i][j - 2] == white && color[i][j - 1] == blue) {
-                            color[i][j-1] = white;
+
+                        //
+
+                        if(color[i][j + 2] == white &&
+                           color[i][j + 1] == blue) {
+                            color[i][j + 1] = white;
                         }
+
+                        //縦の場合の青を白と白で挟んだ場合。
+                        if(color[i][j - 2] == white &&
+                           color[i][j - 1] == blue) {
+                            color[i][j - 1] = white;
+                        }
+
+                        //横の場合
+                        //                        if (color[i -2][j] == white &&
+                        //                        color[i -1][j] == blue) {
+                        //                            color[i-1][j] = white;
+                        //                        }
+                        //
+
                     } else {
                         color[i][j] = blue;
+
+                        // 縦の場合の白を青と青で挟んだ場合。
+                        if(color[i][j - 2] == blue &&
+                           color[i][j - 1] == white) {
+                            color[i][j - 1] = blue;
+                        }
+
+                        if(color[i][j + 2] == blue &&
+                           color[i][j + 1] == white) {
+                            color[i][j + 1] = blue;
+                        }
+
+                        //横の場合
+                        //                        if (color[i-2][j] ==blue &&
+                        //                        color[i-1][j] == white) {
+                        //                            color[i-1][j] = blue;
+                        //                        }
                     }
                 }
                 if(color[i][j] == white) {
