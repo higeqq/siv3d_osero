@@ -66,11 +66,16 @@ void Main() {
                         }
 
                         //横の場合
-                        //                        if (color[i -2][j] == white &&
-                        //                        color[i -1][j] == blue) {
-                        //                            color[i-1][j] = white;
-                        //                        }
-                        //
+                        if (color[i -2][j] == white &&
+                            color[i -1][j] == blue) {
+                              color[i-1][j] = white;
+                        }
+                        
+                        if (color[i + 2][j] == white &&
+                            color[i + 1][j] == blue) {
+                            color[i + 1][j] = white;
+                        }
+                        
 
                     } else {
                         color[i][j] = blue;
@@ -87,10 +92,17 @@ void Main() {
                         }
 
                         //横の場合
-                        //                        if (color[i-2][j] ==blue &&
-                        //                        color[i-1][j] == white) {
-                        //                            color[i-1][j] = blue;
-                        //                        }
+                        if (color[i - 2][j] ==blue &&
+                            color[i - 1][j] == white) {
+                              color[i - 1][j] = blue;
+                        }
+                        
+                        if (color[i + 2][j] == blue &&
+                            color[i + 1][j] == white) {
+                            color[i + 1][j] = blue;
+                        }
+                        
+                        
                     }
                 }
                 if(color[i][j] == white) {
