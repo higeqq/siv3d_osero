@@ -52,57 +52,70 @@ void Main() {
                     if(count % 2 == 0) {
                         color[i][j] = white;
 
-                        //
-
+                        // j + 2 j + 1 j
+                        //　j + 1 がwhiteに変わる
                         if(color[i][j + 2] == white &&
                            color[i][j + 1] == blue) {
                             color[i][j + 1] = white;
                         }
 
-                        //縦の場合の青を白と白で挟んだ場合。
+                        // j + 3 j + 2 j + 1 j
+                        // j + 2 j + 1がwhiteに変わる
+                        if(color[i][j + 3] == white &&
+                           color[i][j + 2] == blue && color[i][j + 1] == blue) {
+                            color[i][j + 2] = white;
+                            color[i][j + 1] = white;
+                        }
+
+                        //  j + 4 j + 3 j + 2 j + 1 j
+                        //  j + 3 j + 3 j + 1がwhiteに変わる
+                        if(color[i][j + 4] == white &&
+                           color[i][j + 3] == blue && color[i][j + 2] == blue &&
+                           color[i][j + 1] == blue) {
+                            color[i][j + 3] = white;
+                            color[i][j + 2] = white;
+                            color[i][j + 1] = white;
+                        }
+
+                        // j - 2　j - 1 j
+                        // j - 1　がwhiteに変わる
                         if(color[i][j - 2] == white &&
                            color[i][j - 1] == blue) {
                             color[i][j - 1] = white;
                         }
 
-                        //横の場合
-                        if (color[i -2][j] == white &&
-                            color[i -1][j] == blue) {
-                              color[i-1][j] = white;
+                        // j - 3 j -2 j -1 j
+                        // j -2 j -1がwhiteに変わる
+                        if(color[i][j - 3] == white &&
+                           color[i][j - 2] == blue && color[i][j - 1] == blue) {
+                            color[i][j - 2] = white;
+                            color[i][j - 1] = white;
                         }
-                        
-                        if (color[i + 2][j] == white &&
-                            color[i + 1][j] == blue) {
-                            color[i + 1][j] = white;
+
+                        //  j - 4 j - 3 j - 2 j - 1 j
+                        //  j - 3 j - 3 j - 1がwhiteに変わる
+                        if(color[i][j - 4] == white &&
+                           color[i][j - 3] == blue && color[i][j - 2] == blue &&
+                           color[i][j - 1] == blue) {
+                            color[i][j - 3] = white;
+                            color[i][j - 2] = white;
+                            color[i][j - 1] = white;
                         }
-                        
 
                     } else {
                         color[i][j] = blue;
 
-                        // 縦の場合の白を青と青で挟んだ場合。
-                        if(color[i][j - 2] == blue &&
-                           color[i][j - 1] == white) {
-                            color[i][j - 1] = blue;
-                        }
-
-                        if(color[i][j + 2] == blue &&
-                           color[i][j + 1] == white) {
-                            color[i][j + 1] = blue;
-                        }
-
-                        //横の場合
-                        if (color[i - 2][j] ==blue &&
-                            color[i - 1][j] == white) {
-                              color[i - 1][j] = blue;
-                        }
-                        
-                        if (color[i + 2][j] == blue &&
-                            color[i + 1][j] == white) {
+                        if(color[i + 2][j] == blue &&
+                           color[i + 1][j] == white) {
                             color[i + 1][j] = blue;
                         }
-                        
-                        
+
+                        // i - 2 i -1 i
+                        // i -1  がblueに変わる
+                        if(color[i - 2][j] == blue &&
+                           color[i - 1][j] == white) {
+                            color[i - 1][j] = blue;
+                        }
                     }
                 }
                 if(color[i][j] == white) {
