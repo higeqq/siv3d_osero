@@ -85,7 +85,6 @@ void Main() {
                             color[i][j + 2] = white;
                             color[i][j + 1] = white;
                         }
-                        
 
                         if(color[i][j + 6] == white &&
                            color[i][j + 5] == blue && color[i][j + 4] == blue &&
@@ -97,7 +96,7 @@ void Main() {
                             color[i][j + 2] = white;
                             color[i][j + 1] = white;
                         }
-//
+                        //
                         if(color[i][j + 7] == white &&
                            color[i][j + 6] == blue && color[i][j + 5] == blue &&
                            color[i][j + 4] == blue && color[i][j + 3] == blue &&
@@ -166,20 +165,116 @@ void Main() {
                             color[i][j - 1] = white;
                         }
 
-
                     } else {
                         color[i][j] = blue;
-//
-                        if(color[i + 2][j] == blue &&
-                           color[i + 1][j] == white) {
-                            color[i + 1][j] = blue;
+                        if(color[i][j + 2] == blue &&
+                           color[i][j + 1] == white) {
+                            color[i][j + 1] = blue;
                         }
 
-                        // i - 2 i -1 i
-                        // i -1  がblueに変わる
-                        if(color[i - 2][j] == blue &&
-                           color[i - 1][j] == white) {
-                            color[i - 1][j] = blue;
+                        // j + 3 j + 2 j + 1 j
+                        // j + 2 j + 1がwhiteに変わる
+                        if(color[i][j + 3] == blue &&
+                           color[i][j + 2] == white && color[i][j + 1] == white) {
+                            color[i][j + 2] = blue;
+                            color[i][j + 1] = blue;
+                        }
+
+                        //  j + 4 j + 3 j + 2 j + 1 j
+                        //  j + 3 j + 3 j + 1がwhiteに変わる
+                        if(color[i][j + 4] == blue &&
+                           color[i][j + 3] == white && color[i][j + 2] == white &&
+                           color[i][j + 1] == white) {
+                            color[i][j + 3] = blue;
+                            color[i][j + 2] = blue;
+                            color[i][j + 1] = blue;
+                        }
+
+                        if(color[i][j + 5] == blue &&
+                           color[i][j + 4] == white && color[i][j + 3] == white &&
+                           color[i][j + 2] == white && color[i][j + 1]) {
+                            color[i][j + 4] = blue;
+                            color[i][j + 3] = blue;
+                            color[i][j + 2] = blue;
+                            color[i][j + 1] = blue;
+                        }
+
+                        if(color[i][j + 6] == blue &&
+                           color[i][j + 5] == white && color[i][j + 4] == white &&
+                           color[i][j + 3] == white && color[i][j + 2] == white &&
+                           color[i][j + 1]) {
+                            color[i][j + 5] = blue;
+                            color[i][j + 4] = blue;
+                            color[i][j + 3] = blue;
+                            color[i][j + 2] = blue;
+                            color[i][j + 1] = blue;
+                        }
+                        //
+                        if(color[i][j + 7] == blue &&
+                           color[i][j + 6] == white && color[i][j + 5] == white &&
+                           color[i][j + 4] == white && color[i][j + 3] == white &&
+                           color[i][j + 2] == white && color[i][j + 1]) {
+                            color[i][j + 6] = blue;
+                            color[i][j + 5] = blue;
+                            color[i][j + 4] = blue;
+                            color[i][j + 3] = blue;
+                            color[i][j + 2] = blue;
+                            color[i][j + 1] = blue;
+                        }
+
+                        // j - 1　がwhiteに変わる
+                        if(color[i][j - 2] == blue &&
+                           color[i][j - 1] == white) {
+                            color[i][j - 1] = blue;
+                        }
+
+                        // j - 3 j -2 j -1 j
+                        // j -2 j -1がwhiteに変わる
+                        if(color[i][j - 3] == blue &&
+                           color[i][j - 2] == white && color[i][j - 1] == white) {
+                            color[i][j - 2] = blue;
+                            color[i][j - 1] = blue;
+                        }
+
+                        //  j - 4 j - 3 j - 2 j - 1 j
+                        //  j - 3 j - 3 j - 1がwhiteに変わる
+                        if(color[i][j - 4] == blue &&
+                           color[i][j - 3] == white && color[i][j - 2] == white &&
+                           color[i][j - 1] == white) {
+                            color[i][j - 3] = blue;
+                            color[i][j - 2] = blue;
+                            color[i][j - 1] = blue;
+                        }
+
+                        if(color[i][j - 5] == blue &&
+                           color[i][j - 4] == white && color[i][j - 3] == white &&
+                           color[i][j - 2] == white && color[i][j - 1] == white) {
+                            color[i][j - 4] = blue;
+                            color[i][j - 3] = blue;
+                            color[i][j - 2] = blue;
+                            color[i][j - 1] = blue;
+                        }
+
+                        if(color[i][j - 6] == blue &&
+                           color[i][j - 5] == white && color[i][j - 4] == white &&
+                           color[i][j - 3] == white && color[i][j - 2] == white &&
+                           color[i][j - 1] == white) {
+                            color[i][j - 5] = blue;
+                            color[i][j - 4] = blue;
+                            color[i][j - 3] = blue;
+                            color[i][j - 2] = blue;
+                            color[i][j - 1] = blue;
+                        }
+                        if(color[i][j - 7] == blue &&
+                           color[i][j - 6] == white && color[i][j - 5] == white &&
+                           color[i][j - 4] == white && color[i][j - 3] == white &&
+                           color[i][j - 2] == white && color[i][j - 1] == white) {
+                            color[i][j - 6] = blue;
+                            color[i][j - 5] = blue;
+                            color[i][j - 4] = blue ;
+                            color[i][j - 3] = blue ;
+                            color[i][j - 2] = blue ;
+                            color[i][j - 1] = blue ;
                         }
                     }
                 }
