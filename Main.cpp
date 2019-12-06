@@ -1,4 +1,12 @@
 #include <Siv3D.hpp>
+
+int count = 1;
+int color[8][8];
+int white = 1;
+int blue = 2;
+Array<Rect> cell;
+Array<Circle> stone;
+
 void Waku() {
     int yoko = 100;
     int tate = 220;
@@ -14,31 +22,46 @@ void Waku() {
         Line(tate, 105, tate, 500).draw(4, Palette::White);
     }
 }
-void syoki() { Circle(380, 280, 15).draw(); }
-void Main() {
-    int count = 1;
-    int color[8][8];
-    int white = 1;
-    int blue = 2;
-    //    Rect x1(223,103,45,45);
-    //    Rect x2(273,103,45,45);
-    Array<Rect> cell;
-    Array<Circle> d;
+
+void initialize() {
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
             color[i][j] = 0;
             cell << Rect(223 + 50 * j, 103 + 50 * i, 45, 45);
-            d << Circle(245 + 50 * j, 125 + 50 * i, 15);
-            //            blue << Circle(245 + 50 * j, 125 + 50 * i, 15);
+            stone << Circle(245 + 50 * j, 125 + 50 * i, 15);
+            
         }
     }
+    
     color[3][3] = 1;
     color[3][4] = 2;
     color[4][3] = 2;
     color[4][4] = 1;
+}
 
-    // jが縦　iが横
+void reverse(int x, int y) {
+    //　このnは青
+    for (int n = 1; n <= 6; n ++) {
+        // n + 1が挟む先の白
+        bool flag = color[x + n + 1][y] == white;
+        for(int i = 1; i <= n; i ++) {
+            // ここは(color[][]&& == blue color[][] == blueの部分)
+            flag &= color[x + i][y] == blue;
+        }
+        
+        // trueの場合
+        if (flag) {
+            for (int i = 1; i <= n; i ++) {
+                //ここは前やったcolor[i + n][i + j] = white の部分
+                color[x + i][y] = white;
+            }
+        }
+    }
+}
 
+void Main() {
+    initialize();
+    // xが横 yが縦
     while(System::Update()) {
         // カウントして、割ったあまりが1なら白と、2なら青と (coutn % 2 ==
         // 0なら白と)(count %2 == 1なら青とひ表示
@@ -47,36 +70,19 @@ void Main() {
             for(int y = 0; y < 8; y++) {
                 if(cell[x + y * 8].leftClicked()) {
                     count++;
-                    
                     //　もしカウントが割り切れるなら白を描画、割り切れないならブルーを描画
                     if(count % 2 == 0) {
                         color[x][y] = white;
-                        for (int n = 1; n <= 6; n ++) {
-                            bool flag =color[x + n + 1][y] == white;
-                            for(int l = 1; l <= n; l ++) {
-                            flag &=color[x + l][y] == blue;
-                            }
-                            for (int l = 1; l <= n; l ++) {
-                                if (flag) {
-                                    color[x + l][y] = white;
-                                }
-                            }
-                        }
-
-                        
-
-
-                      
+                        reverse(x, y);
                     } else {
                         color[x][y] = blue;
-        
                     }
                 }
                 if(color[x][y] == white) {
-                    d[x + y * 8].draw();
+                    stone[x + y * 8].draw();
                 }
                 if(color[x][y] == blue) {
-                    d[x + y * 8].draw(Palette::Skyblue);
+                    stone[x + y * 8].draw(Palette::Skyblue);
                 }
             }
         }
