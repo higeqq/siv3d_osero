@@ -107,7 +107,7 @@ void reverse(int x, int y) {
             }
         }
     }
-    
+
     //右斜め下の処理
     //上に石があった場合の右ななめ
     for (int n = 1 ; n < 6; n ++) {
@@ -133,7 +133,7 @@ void reverse(int x, int y) {
                }
            }
        }
-    
+
     // 左斜めの処理
     for (int n = 1; n <= 6; n ++) {
         bool flag = color[x + n + 1][y - n - 1] == white;
@@ -158,8 +158,6 @@ void reverse(int x, int y) {
             }
         }
     }
-    
-    
     
 }
 void Main() {
