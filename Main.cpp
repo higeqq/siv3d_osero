@@ -31,14 +31,14 @@ void initialize() {
             stone << Circle(245 + 50 * j, 125 + 50 * i, 15);
         }
     }
-    
+
     color[3][3] = 1;
     color[3][4] = 2;
     color[4][3] = 2;
     color[4][4] = 1;
 }
 
-void reverse(int x, int y) {
+void reverse_white(int x, int y) {
     //　このnは青
     for (int n = 1; n <= 6; n ++) {
         // n + 1が挟む先の白
@@ -133,7 +133,6 @@ void reverse(int x, int y) {
                }
            }
        }
-
     // 左斜めの処理
     for (int n = 1; n <= 6; n ++) {
         bool flag = color[x + n + 1][y - n - 1] == white;
@@ -158,8 +157,123 @@ void reverse(int x, int y) {
             }
         }
     }
-    
 }
+
+
+void reverse_blue(int x, int y) {
+    for (int n = 1; n <= 6; n ++) {
+          bool flag = color[x + n + 1][y] == blue;
+          for(int i = 1; i <= n; i ++) {
+              flag &= color[x + i][y] == white;
+          }
+          if (flag) {
+              for (int i = 1; i <= n; i ++) {
+                  color[x + i][y] = blue;
+              }
+          }
+      }
+
+      for (int n = 1; n <= 6; n ++) {
+          bool flag = color[x - n - 1][y] == blue;
+          for (int i = 1; i<= n; i ++) {
+              flag &= color[x - i][y] == white;
+          }
+          if (flag) {
+              for (int i = 1; i <= n; i ++) {
+                  color[x - i][y] = blue;
+              }
+          }
+      }
+
+       for (int n = 1; n <= 6; n ++) {
+           bool flag = color[x][y + n + 1] == blue;
+           for(int i = 1; i <= n; i ++) {
+
+               flag &= color[x ][y + i] == white;
+           }
+
+           if (flag) {
+               for (int i = 1; i <= n; i ++) {
+
+                   color[x ][y + i] = blue;
+               }
+           }
+       }
+
+
+      for(int n = 1; n <= 6; n++) {
+          bool flag = color[x][y - n - 1] == blue;
+          for (int i = 1; i <= n; i ++) {
+              flag &= color[x][y - i] == white;
+          }
+      if (flag) {
+          for (int i = 0; i <= n; i ++) {
+              color[x][y - i] = blue;
+          }
+      }
+    }
+
+      for (int n = 0; n <= 6; n ++) {
+          bool flag = color[x + n + 1][y + 1] == blue;
+          for (int i = 1; i <= n; i ++) {
+              flag &= color[x][y + i] == white;
+          }
+          if (flag) {
+              for (int i = 1; i <= n; i ++) {
+                  color[x + i][y + i] = blue;
+              }
+          }
+      }
+
+      for (int n = 1 ; n < 6; n ++) {
+          bool flag = color[x - n - 1][y - n - 1] == blue;
+          for (int i = 1; i <= n; i ++) {
+              flag &= color[x - i][y - i] == white;
+          }
+          if (flag) {
+              for (int i = 1; i <= n; i ++) {
+                  color[x - i][y - i] = blue;
+              }
+          }
+      }
+      //下に石があった場合の右ななめ
+      for (int n = 1 ; n < 6; n ++) {
+             bool flag = color[x + n + 1][y + n + 1] == blue;
+             for (int i = 1; i <= n; i ++) {
+                 flag &= color[x + i][y + i] == white;
+             }
+             if (flag) {
+                 for (int i = 1; i <= n; i ++) {
+                     color[x + i][y + i] = blue;
+                 }
+             }
+         }
+      // 左斜めの処理
+      for (int n = 1; n <= 6; n ++) {
+          bool flag = color[x + n + 1][y - n - 1] == blue;
+          for (int i = 1; i <= n; i ++) {
+              flag &= color[x + i][y - i] == white;
+          }
+          if (flag) {
+              for (int i = 1; i <= n; i ++) {
+                  color[x + i][y - i] = blue;
+              }
+          }
+      }
+
+      for (int n = 1; n <= 6; n ++) {
+          bool flag = color[x - n - 1][y + n + 1] == blue;
+          for (int i = 1; i <= n; i ++) {
+              flag &= color[x - i][y + i] == white;
+          }
+          if (flag) {
+              for (int i = 1; i <= n; i ++) {
+                  color[x - i][y + i] = blue;
+              }
+          }
+      }
+}
+
 void Main() {
     initialize();
     // xが横 yが縦
@@ -174,9 +288,10 @@ void Main() {
                     //　もしカウントが割り切れるなら白を描画、割り切れないならブルーを描画
                     if(count % 2 == 0) {
                         color[x][y] = white;
-                        reverse(x, y);
+                        reverse_white(x, y);
                     } else {
                         color[x][y] = blue;
+                        reverse_blue(x, y);
                     }
                 }
                 if(color[x][y] == white) {
