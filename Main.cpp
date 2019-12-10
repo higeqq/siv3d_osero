@@ -40,69 +40,68 @@ void initialize() {
 
 void reverse_white(int x, int y) {
     //　このnは青
-    for (int n = 1; n <= 6; n ++) {
+    for(int n = 1; n <= 6; n++) {
         // n + 1が挟む先の白
         bool flag = color[x + n + 1][y] == white;
-        for(int i = 1; i <= n; i ++) {
+        for(int i = 1; i <= n; i++) {
             // ここは(color[][]&& == blue color[][] == blueの部分)
             flag &= color[x + i][y] == blue;
         }
-       // trueの場合
-        if (flag) {
-            for (int i = 1; i <= n; i ++) {
+        // trueの場合
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
                 //ここは前やったcolor[i + n][i + j] = white の部分
                 color[x + i][y] = white;
             }
         }
     }
 
-    for (int n = 1; n <= 6; n ++) {
+    for(int n = 1; n <= 6; n++) {
         bool flag = color[x - n - 1][y] == white;
-        for (int i = 1; i<= n; i ++) {
+        for(int i = 1; i <= n; i++) {
             flag &= color[x - i][y] == blue;
         }
-        if (flag) {
-            for (int i = 1; i <= n; i ++) {
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
                 color[x - i][y] = white;
             }
         }
     }
 
-     for (int n = 1; n <= 6; n ++) {
-         bool flag = color[x][y + n + 1] == white;
-         for(int i = 1; i <= n; i ++) {
+    for(int n = 1; n <= 6; n++) {
+        bool flag = color[x][y + n + 1] == white;
+        for(int i = 1; i <= n; i++) {
 
-             flag &= color[x ][y + i] == blue;
-         }
+            flag &= color[x][y + i] == blue;
+        }
 
-         if (flag) {
-             for (int i = 1; i <= n; i ++) {
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
 
-                 color[x ][y + i] = white;
-             }
-         }
-     }
-
+                color[x][y + i] = white;
+            }
+        }
+    }
 
     for(int n = 1; n <= 6; n++) {
         bool flag = color[x][y - n - 1] == white;
-        for (int i = 1; i <= n; i ++) {
+        for(int i = 1; i <= n; i++) {
             flag &= color[x][y - i] == blue;
         }
-    if (flag) {
-        for (int i = 0; i <= n; i ++) {
-            color[x][y - i] = white;
+        if(flag) {
+            for(int i = 0; i <= n; i++) {
+                color[x][y - i] = white;
+            }
         }
     }
-  }
 
-    for (int n = 0; n <= 6; n ++) {
+    for(int n = 0; n <= 6; n++) {
         bool flag = color[x + n + 1][y + 1] == white;
-        for (int i = 1; i <= n; i ++) {
+        for(int i = 1; i <= n; i++) {
             flag &= color[x][y + i] == blue;
         }
-        if (flag) {
-            for (int i = 1; i <= n; i ++) {
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
                 color[x + i][y + i] = white;
             }
         }
@@ -110,168 +109,166 @@ void reverse_white(int x, int y) {
 
     //右斜め下の処理
     //上に石があった場合の右ななめ
-    for (int n = 1 ; n < 6; n ++) {
+    for(int n = 1; n < 6; n++) {
         bool flag = color[x - n - 1][y - n - 1] == white;
-        for (int i = 1; i <= n; i ++) {
+        for(int i = 1; i <= n; i++) {
             flag &= color[x - i][y - i] == blue;
         }
-        if (flag) {
-            for (int i = 1; i <= n; i ++) {
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
                 color[x - i][y - i] = white;
             }
         }
     }
     //下に石があった場合の右ななめ
-    for (int n = 1 ; n < 6; n ++) {
-           bool flag = color[x + n + 1][y + n + 1] == white;
-           for (int i = 1; i <= n; i ++) {
-               flag &= color[x + i][y + i] == blue;
-           }
-           if (flag) {
-               for (int i = 1; i <= n; i ++) {
-                   color[x + i][y + i] = white;
-               }
-           }
-       }
+    for(int n = 1; n < 6; n++) {
+        bool flag = color[x + n + 1][y + n + 1] == white;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x + i][y + i] == blue;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x + i][y + i] = white;
+            }
+        }
+    }
     // 左斜めの処理
-    for (int n = 1; n <= 6; n ++) {
+    for(int n = 1; n <= 6; n++) {
         bool flag = color[x + n + 1][y - n - 1] == white;
-        for (int i = 1; i <= n; i ++) {
+        for(int i = 1; i <= n; i++) {
             flag &= color[x + i][y - i] == blue;
         }
-        if (flag) {
-            for (int i = 1; i <= n; i ++) {
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
                 color[x + i][y - i] = white;
             }
         }
     }
 
-    for (int n = 1; n <= 6; n ++) {
+    for(int n = 1; n <= 6; n++) {
         bool flag = color[x - n - 1][y + n + 1] == white;
-        for (int i = 1; i <= n; i ++) {
+        for(int i = 1; i <= n; i++) {
             flag &= color[x - i][y + i] == blue;
         }
-        if (flag) {
-            for (int i = 1; i <= n; i ++) {
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
                 color[x - i][y + i] = white;
             }
         }
     }
 }
 
-
 void reverse_blue(int x, int y) {
-    for (int n = 1; n <= 6; n ++) {
-          bool flag = color[x + n + 1][y] == blue;
-          for(int i = 1; i <= n; i ++) {
-              flag &= color[x + i][y] == white;
-          }
-          if (flag) {
-              for (int i = 1; i <= n; i ++) {
-                  color[x + i][y] = blue;
-              }
-          }
-      }
-
-      for (int n = 1; n <= 6; n ++) {
-          bool flag = color[x - n - 1][y] == blue;
-          for (int i = 1; i<= n; i ++) {
-              flag &= color[x - i][y] == white;
-          }
-          if (flag) {
-              for (int i = 1; i <= n; i ++) {
-                  color[x - i][y] = blue;
-              }
-          }
-      }
-
-       for (int n = 1; n <= 6; n ++) {
-           bool flag = color[x][y + n + 1] == blue;
-           for(int i = 1; i <= n; i ++) {
-
-               flag &= color[x ][y + i] == white;
-           }
-
-           if (flag) {
-               for (int i = 1; i <= n; i ++) {
-
-                   color[x ][y + i] = blue;
-               }
-           }
-       }
-
-
-      for(int n = 1; n <= 6; n++) {
-          bool flag = color[x][y - n - 1] == blue;
-          for (int i = 1; i <= n; i ++) {
-              flag &= color[x][y - i] == white;
-          }
-      if (flag) {
-          for (int i = 0; i <= n; i ++) {
-              color[x][y - i] = blue;
-          }
-      }
+    for(int n = 1; n <= 6; n++) {
+        bool flag = color[x + n + 1][y] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x + i][y] == white;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x + i][y] = blue;
+            }
+        }
     }
 
-      for (int n = 0; n <= 6; n ++) {
-          bool flag = color[x + n + 1][y + 1] == blue;
-          for (int i = 1; i <= n; i ++) {
-              flag &= color[x][y + i] == white;
-          }
-          if (flag) {
-              for (int i = 1; i <= n; i ++) {
-                  color[x + i][y + i] = blue;
-              }
-          }
-      }
+    for(int n = 1; n <= 6; n++) {
+        bool flag = color[x - n - 1][y] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x - i][y] == white;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x - i][y] = blue;
+            }
+        }
+    }
 
-      for (int n = 1 ; n < 6; n ++) {
-          bool flag = color[x - n - 1][y - n - 1] == blue;
-          for (int i = 1; i <= n; i ++) {
-              flag &= color[x - i][y - i] == white;
-          }
-          if (flag) {
-              for (int i = 1; i <= n; i ++) {
-                  color[x - i][y - i] = blue;
-              }
-          }
-      }
-      //下に石があった場合の右ななめ
-      for (int n = 1 ; n < 6; n ++) {
-             bool flag = color[x + n + 1][y + n + 1] == blue;
-             for (int i = 1; i <= n; i ++) {
-                 flag &= color[x + i][y + i] == white;
-             }
-             if (flag) {
-                 for (int i = 1; i <= n; i ++) {
-                     color[x + i][y + i] = blue;
-                 }
-             }
-         }
-      // 左斜めの処理
-      for (int n = 1; n <= 6; n ++) {
-          bool flag = color[x + n + 1][y - n - 1] == blue;
-          for (int i = 1; i <= n; i ++) {
-              flag &= color[x + i][y - i] == white;
-          }
-          if (flag) {
-              for (int i = 1; i <= n; i ++) {
-                  color[x + i][y - i] = blue;
-              }
-          }
-      }
+    for(int n = 1; n <= 6; n++) {
+        bool flag = color[x][y + n + 1] == blue;
+        for(int i = 1; i <= n; i++) {
 
-      for (int n = 1; n <= 6; n ++) {
-          bool flag = color[x - n - 1][y + n + 1] == blue;
-          for (int i = 1; i <= n; i ++) {
-              flag &= color[x - i][y + i] == white;
-          }
-          if (flag) {
-              for (int i = 1; i <= n; i ++) {
-                  color[x - i][y + i] = blue;
-              }
-          }
-      }
+            flag &= color[x][y + i] == white;
+        }
+
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+
+                color[x][y + i] = blue;
+            }
+        }
+    }
+
+    for(int n = 1; n <= 6; n++) {
+        bool flag = color[x][y - n - 1] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x][y - i] == white;
+        }
+        if(flag) {
+            for(int i = 0; i <= n; i++) {
+                color[x][y - i] = blue;
+            }
+        }
+    }
+
+    for(int n = 0; n <= 6; n++) {
+        bool flag = color[x + n + 1][y + 1] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x][y + i] == white;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x + i][y + i] = blue;
+            }
+        }
+    }
+
+    for(int n = 1; n < 6; n++) {
+        bool flag = color[x - n - 1][y - n - 1] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x - i][y - i] == white;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x - i][y - i] = blue;
+            }
+        }
+    }
+    //下に石があった場合の右ななめ
+    for(int n = 1; n < 6; n++) {
+        bool flag = color[x + n + 1][y + n + 1] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x + i][y + i] == white;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x + i][y + i] = blue;
+            }
+        }
+    }
+    // 左斜めの処理
+    for(int n = 1; n <= 6; n++) {
+        bool flag = color[x + n + 1][y - n - 1] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x + i][y - i] == white;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x + i][y - i] = blue;
+            }
+        }
+    }
+
+    for(int n = 1; n <= 6; n++) {
+        bool flag = color[x - n - 1][y + n + 1] == blue;
+        for(int i = 1; i <= n; i++) {
+            flag &= color[x - i][y + i] == white;
+        }
+        if(flag) {
+            for(int i = 1; i <= n; i++) {
+                color[x - i][y + i] = blue;
+            }
+        }
+    }
 }
 
 void Main() {
