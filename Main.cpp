@@ -1,12 +1,16 @@
 #include <Siv3D.hpp>
 
+
+int test_c = 1;
+int white_c = 0;
+int blue_c = 0;
 int count = 1;
 int color[8][8];
 int white = 1;
 int blue = 2;
+Rect result_btn(650, 200, 35, 35);
 Array<Rect> cell;
 Array<Circle> stone;
-
 void Waku() {
     int yoko = 100;
     int tate = 220;
@@ -17,7 +21,7 @@ void Waku() {
         yoko += 50;
         Line(225, yoko, 615, yoko).draw(4, Palette::White);
     }
-    for(int s = 0; s < 8; s++) {
+    for(int j = 0; j < 8; j++) {
         tate += 50;
         Line(tate, 105, tate, 500).draw(4, Palette::White);
     }
@@ -32,10 +36,10 @@ void initialize() {
         }
     }
 
-    color[3][3] = 1;
-    color[3][4] = 2;
-    color[4][3] = 2;
-    color[4][4] = 1;
+    color[3][3] = white;
+    color[3][4] = blue;
+    color[4][3] = blue;
+    color[4][4] = white;
 }
 
 void reverse_white(int x, int y) {
@@ -77,7 +81,6 @@ void reverse_white(int x, int y) {
 
         if(flag) {
             for(int i = 1; i <= n; i++) {
-
                 color[x][y + i] = white;
             }
         }
@@ -106,9 +109,7 @@ void reverse_white(int x, int y) {
             }
         }
     }
-
-    //右斜め下の処理
-    //上に石があった場合の右ななめ
+    
     for(int n = 1; n < 6; n++) {
         bool flag = color[x - n - 1][y - n - 1] == white;
         for(int i = 1; i <= n; i++) {
@@ -198,6 +199,7 @@ void reverse_blue(int x, int y) {
         }
     }
 
+    
     for(int n = 1; n <= 6; n++) {
         bool flag = color[x][y - n - 1] == blue;
         for(int i = 1; i <= n; i++) {
@@ -210,6 +212,7 @@ void reverse_blue(int x, int y) {
         }
     }
 
+    
     for(int n = 0; n <= 6; n++) {
         bool flag = color[x + n + 1][y + 1] == blue;
         for(int i = 1; i <= n; i++) {
@@ -222,6 +225,7 @@ void reverse_blue(int x, int y) {
         }
     }
 
+    
     for(int n = 1; n < 6; n++) {
         bool flag = color[x - n - 1][y - n - 1] == blue;
         for(int i = 1; i <= n; i++) {
@@ -233,7 +237,8 @@ void reverse_blue(int x, int y) {
             }
         }
     }
-    //下に石があった場合の右ななめ
+    
+    
     for(int n = 1; n < 6; n++) {
         bool flag = color[x + n + 1][y + n + 1] == blue;
         for(int i = 1; i <= n; i++) {
@@ -245,7 +250,7 @@ void reverse_blue(int x, int y) {
             }
         }
     }
-    // 左斜めの処理
+    
     for(int n = 1; n <= 6; n++) {
         bool flag = color[x + n + 1][y - n - 1] == blue;
         for(int i = 1; i <= n; i++) {
@@ -273,11 +278,12 @@ void reverse_blue(int x, int y) {
 
 void Main() {
     initialize();
-    // xが横 yが縦
+    const Font font(50);
     while(System::Update()) {
         // カウントして、割ったあまりが1なら白と、2なら青と (coutn % 2 ==
-        // 0なら白と)(count %2 == 1なら青とひ表示
+        // 0なら白と)(count %2 == 1なら青とひ表示o
         Waku();
+        result_btn.draw();
         for(int x = 0; x < 8; x++) {
             for(int y = 0; y < 8; y++) {
                 if(cell[x + y * 8].leftClicked()) {
@@ -299,5 +305,28 @@ void Main() {
                 }
             }
         }
+        
+        if (result_btn.leftClicked()) {
+            for (int x = 0; x < 7; x ++) {
+                for (int y = 0; y < 7; y ++) {
+                    if (color[x][y] == 1) {
+                        white_c++;
+                    }
+                    else if (color[x][y] == 2)
+                        blue_c++;
+                }
+                
+                if (white_c < blue_c) {
+                     font(U"青の勝利です").draw(20, 20);
+                }
+                else if (white_c > blue_c) {
+                     font(U"白の勝利です").draw(20, 20);
+                }
+                else {
+                    font(U"引き分けです").draw(20,20);
+                }
+            }
+        }
+        
     }
 }
