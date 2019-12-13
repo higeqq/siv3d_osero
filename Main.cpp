@@ -41,10 +41,7 @@ void initialize() {
     color[4][4] = white;
 }
 
-bool reverse_white(int x, int y) {
-    
-    bool reversed = false;
-    
+void reverse_white(int x, int y) {
     //　このnは青
     for(int n = 1; n <= 6; n++) {
         // n + 1が挟む先の白
@@ -55,7 +52,6 @@ bool reverse_white(int x, int y) {
         }
         // trueの場合
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 //ここは前やったcolor[i + n][i + j] = white の部分
                 color[x + i][y] = white;
@@ -69,7 +65,6 @@ bool reverse_white(int x, int y) {
             flag &= color[x - i][y] == blue;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x - i][y] = white;
             }
@@ -84,7 +79,6 @@ bool reverse_white(int x, int y) {
         }
 
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x][y + i] = white;
             }
@@ -97,7 +91,6 @@ bool reverse_white(int x, int y) {
             flag &= color[x][y - i] == blue;
         }
         if(flag) {
-            reversed = true;
             for(int i = 0; i <= n; i++) {
                 color[x][y - i] = white;
             }
@@ -110,7 +103,6 @@ bool reverse_white(int x, int y) {
             flag &= color[x][y + i] == blue;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x + i][y + i] = white;
             }
@@ -123,7 +115,6 @@ bool reverse_white(int x, int y) {
             flag &= color[x - i][y - i] == blue;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x - i][y - i] = white;
             }
@@ -136,7 +127,6 @@ bool reverse_white(int x, int y) {
             flag &= color[x + i][y + i] == blue;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x + i][y + i] = white;
             }
@@ -149,7 +139,6 @@ bool reverse_white(int x, int y) {
             flag &= color[x + i][y - i] == blue;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x + i][y - i] = white;
             }
@@ -162,25 +151,20 @@ bool reverse_white(int x, int y) {
             flag &= color[x - i][y + i] == blue;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x - i][y + i] = white;
             }
         }
     }
-    return true;
 }
 
-bool reverse_blue(int x, int y) {
-    
-  bool reversed = false;
+void reverse_blue(int x, int y) {
     for(int n = 1; n <= 6; n++) {
         bool flag = color[x + n + 1][y] == blue;
         for(int i = 1; i <= n; i++) {
             flag &= color[x + i][y] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x + i][y] = blue;
             }
@@ -193,7 +177,6 @@ bool reverse_blue(int x, int y) {
             flag &= color[x - i][y] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x - i][y] = blue;
             }
@@ -208,7 +191,6 @@ bool reverse_blue(int x, int y) {
         }
 
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
 
                 color[x][y + i] = blue;
@@ -222,7 +204,6 @@ bool reverse_blue(int x, int y) {
             flag &= color[x][y - i] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 0; i <= n; i++) {
                 color[x][y - i] = blue;
             }
@@ -235,7 +216,6 @@ bool reverse_blue(int x, int y) {
             flag &= color[x][y + i] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x + i][y + i] = blue;
             }
@@ -248,7 +228,6 @@ bool reverse_blue(int x, int y) {
             flag &= color[x - i][y - i] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x - i][y - i] = blue;
             }
@@ -261,7 +240,6 @@ bool reverse_blue(int x, int y) {
             flag &= color[x + i][y + i] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x + i][y + i] = blue;
             }
@@ -274,7 +252,6 @@ bool reverse_blue(int x, int y) {
             flag &= color[x + i][y - i] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x + i][y - i] = blue;
             }
@@ -287,13 +264,11 @@ bool reverse_blue(int x, int y) {
             flag &= color[x - i][y + i] == white;
         }
         if(flag) {
-            reversed = true;
             for(int i = 1; i <= n; i++) {
                 color[x - i][y + i] = blue;
             }
         }
     }
-    return true;
 }
 
 void Main() {
@@ -311,53 +286,43 @@ void Main() {
                     //　もしカウントが割り切れるなら白を描画、割り切れないならブルーを描画
                     if(count % 2 == 0) {
                         color[x][y] = white;
-                        if(reverse_white(x, y) == true) {
-                            reverse_white(x, y);
-                        } else {
-                            // ここに多重ループを抜ける処理を書く
-                            continue;
-                        }
                         reverse_white(x, y);
                     } else {
                         color[x][y] = blue;
-                        if(reverse_blue(x, y) == true) {
-                            reverse_blue(x, y);
-                        } else {
-                            // ここに多重ループを抜ける処理を書く
-                            continue;
-                        }
+                        reverse_blue(x, y);
                     }
                 }
                 if(color[x][y] == white) {
                     stone[x + y * 8].draw();
-                } else if(color[x][y] == blue) {
+                }
+                if(color[x][y] == blue) {
                     stone[x + y * 8].draw(Palette::Skyblue);
                 }
             }
         }
-    }
 
-    if(result_btn.leftPressed()) {
-        test_c = 1; // count
-        white_c = 0;
-        blue_c = 0;
-        for(int x = 0; x < 8; x++) {
-            for(int y = 0; y < 8; y++) {
-                if(color[x][y] == 1) {
-                    white_c++;
-                } else if(color[x][y] == 2)
-                    blue_c++;
+        if(result_btn.leftClicked()) {
+            test_c = 1;
+            white_c = 0;
+            blue_c = 0;
+            for(int x = 0; x < 7; x++) {
+                for(int y = 0; y < 7; y++) {
+                    if(color[x][y] == 1) {
+                        white_c++;
+                    } else if(color[x][y] == 2)
+                        blue_c++;
+                }
             }
         }
-    }
-    if(test_c == 1) {
-        if(white_c < blue_c) {
-            font(U"青の勝利です").draw(20, 20);
+        if(test_c == 1) {
 
-        } else if(white_c > blue_c) {
-            font(U"白の勝利です").draw(20, 20);
-        } else {
-            font(U"引き分けです").draw(20, 20);
+            if(white_c < blue_c) {
+                font(U"青の勝利です").draw(20, 20);
+            } else if(white_c > blue_c) {
+                font(U"白の勝利です").draw(20, 20);
+            } else {
+                font(U"引き分けです").draw(20, 20);
+            }
         }
     }
 }
