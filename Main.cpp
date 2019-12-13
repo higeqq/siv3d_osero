@@ -305,8 +305,8 @@ void Main() {
             test_c = 1;
             white_c = 0;
             blue_c = 0;
-            for(int x = 0; x < 7; x++) {
-                for(int y = 0; y < 7; y++) {
+            for(int x = 0; x < 8; x++) {
+                for(int y = 0; y < 8; y++) {
                     if(color[x][y] == 1) {
                         white_c++;
                     } else if(color[x][y] == 2)
