@@ -5,25 +5,18 @@ int white_c = 0;
 int blue_c = 0;
 int count = 1;
 int color[8][8];
+double FILED[8][8];
 int white = 1;
 int blue = 2;
 Rect result_btn(650, 200, 35, 35);
 Array<Rect> cell;
 Array<Circle> stone;
-void Waku() {
-    int yoko = 100;
-    int tate = 220;
-    //　オセロの外枠
-    Rect(220, 100, 400, 400).drawFrame(3, 0);
-    //　横線の処理
-    for(int i = 0; i < 8; i++) {
-        yoko += 50;
-        Line(225, yoko, 615, yoko).draw(4, Palette::White);
-    }
-    for(int j = 0; j < 8; j++) {
-        tate += 50;
-        Line(tate, 105, tate, 500).draw(4, Palette::White);
-    }
+Array<Rect> WALL;
+void Wall() {
+    for (int i = 0; i < 8; i++)
+        for (int j = 0; j < 8; j++) {
+            WALL << Rect(220, 100 + 50 * i, 50 + 50 * j, 50).drawFrame(1, 0);
+        }
 }
 
 void initialize() {
@@ -277,7 +270,7 @@ void Main() {
     while(System::Update()) {
         // カウントして、割ったあまりが1なら白と、2なら青と (coutn % 2 ==
         // 0なら白と)(count %2 == 1なら青とひ表示o
-        Waku();
+        Wall();
         result_btn.draw();
         for(int x = 0; x < 8; x++) {
             for(int y = 0; y < 8; y++) {
